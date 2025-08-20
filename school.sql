@@ -146,3 +146,49 @@ SELECT * FROM students;
 -- DELETE Statement
 SELECT * FROM students_old;
 DELETE FROM students_old WHERE student_id = 2;
+DELETE FROM students_new;
+SHOW TABLES;
+
+-- JOINS --
+CREATE DATABASE joins;
+USE joins;
+
+CREATE TABLE table1 (column1 INT);
+CREATE TABLE table2 (column2 INT);
+
+SHOW TABLES;
+
+INSERT INTO table1 VALUES (11), (12), (13), (14), (15);
+INSERT INTO table2 VALUES (12), (15), (53);
+
+
+
+SELECT * FROM  table1;
+SELECT * FROM table2;
+
+-- INNER JOIN
+SELECT * FROM table1 INNER JOIN table2 on table1.column1 = table2.column2;
+
+USE store;
+SELECT * FROM customers;
+SELECT * FROM orders;
+
+SELECT first_name, last_name, city FROM customers INNER JOIN orders ON customers.customer_id = orders.customer_id;
+SELECT first_name, last_name, phone, address, city, state FROM customers INNER JOIN orders ON customers.customer_id = orders.customer_id; 
+
+-- OUTER  JOIN -- LEFT OUTER JOIN
+USE joins;
+SELECT * FROM table1 LEFT OUTER JOIN table2 ON table1.column1 = table2.column2;
+
+-- OUTER JOIN -- RIGHT OUTER JOIN
+SELECT * FROM table1 RIGHT OUTER JOIN table2 ON table1.column1 = table2.column2;
+
+-- CROSS JOIN
+SELECT * FROM table1 CROSS JOIN table2 ;
+
+-- UNION Operator
+SELECT * FROM table1 UNION SELECT * FROM table2;
+
+USE store;
+CREATE VIEW active_proj AS SELECT customers.first_name, customers.phone, customers.city, orders.status FROM customers INNER JOIN orders ON customers.customer_id = orders.customer_id;
+SELECT * FROM active_proj;
